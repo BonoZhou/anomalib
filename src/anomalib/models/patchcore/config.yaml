@@ -1,9 +1,13 @@
-dataset:
-  name: mvtec
-  format: mvtec
-  path: ./datasets/MVTec
-  task: segmentation
-  category: bottle
+dataset:  
+  name: cpu
+  format: folder
+  path: ./datasets/CPU
+  task: classification
+  normal_dir: "OK1"
+  normal_test_dir: 
+  abnormal_dir: "NG1"
+  mask_dir: 
+  extensions: ".jpg"
   train_batch_size: 32
   eval_batch_size: 32
   num_workers: 8
@@ -80,7 +84,7 @@ trainer:
   check_val_every_n_epoch: 1 # Don't validate before extracting features.
   fast_dev_run: false
   accumulate_grad_batches: 1
-  max_epochs: 1
+  max_epochs: 10
   min_epochs: null
   max_steps: -1
   min_steps: null
