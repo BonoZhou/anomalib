@@ -4,12 +4,12 @@ dataset:
   path: ./datasets/CPU
   task: classification
   normal_dir: "OK1"
-  normal_test_dir: 
+  normal_test_dir: null
   abnormal_dir: "NG1"
-  mask_dir: 
+  mask_dir: null
   extensions: ".jpg"
-  train_batch_size: 32
-  eval_batch_size: 32
+  train_batch_size: 16 #默认32
+  eval_batch_size: 16 #默认32
   num_workers: 8
   image_size: 256 # dimensions to which images are resized (mandatory)
   center_crop: 224 # dimensions to which images are center-cropped after resizing (optional)
@@ -56,7 +56,7 @@ visualization:
   show_images: False # show images on the screen
   save_images: True # save images to the file system
   log_images: True # log images to the available loggers (if any)
-  image_save_path: null # path to which images will be saved
+  image_save_path: 'result' # path to which images will be saved
   mode: full # options: ["full", "simple"]
 
 project:
