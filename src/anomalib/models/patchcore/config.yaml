@@ -11,7 +11,7 @@ dataset:
   train_batch_size: 16 #默认32
   eval_batch_size: 16 #默认32
   num_workers: 8
-  image_size: 325x800 # dimensions to which images are resized (mandatory)
+  image_size: [325,800] # dimensions to which images are resized (mandatory)
   center_crop: 224 # dimensions to which images are center-cropped after resizing (optional)
   normalization: imagenet # data distribution to which the images will be normalized: [none, imagenet]
   transform_config:
