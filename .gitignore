@@ -4,6 +4,7 @@ pre_trained
 !anomalib/datasets
 !tests/pre_merge/datasets
 results
+result
 !anomalib/core/results
 
 # Jupyter Notebooks
