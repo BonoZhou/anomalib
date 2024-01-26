@@ -31,6 +31,7 @@ class ImageResult:
     """Collection of data needed to visualize the predictions for an image."""
 
     image: np.ndarray
+#    original_image: np.ndarray
     pred_score: float
     pred_label: str
     anomaly_map: np.ndarray | None = None
@@ -201,8 +202,10 @@ class Visualizer:
                 image_with_boxes = draw_boxes(image=image_with_boxes, boxes=image_result.gt_boxes, color=(255, 0, 0))
             return image_with_boxes
         if self.task == TaskType.SEGMENTATION:
+            #height, width = image_result.heat_map.shape[-2:]
+            blankimage = np.zeros_like(image_result.heat_map)
             visualization = mark_boundaries(
-                image_result.heat_map, image_result.pred_mask, color=(1, 0, 0), mode="thick"
+                blankimage, image_result.pred_mask, color=(1, 0, 0), mode="thick"
             )
             return (visualization * 255).astype(np.uint8)
         if self.task == TaskType.CLASSIFICATION:
@@ -269,10 +272,18 @@ class ImageGrid:
         Returns:
             Image consisting of a grid of added images and their title.
         """
+        dpi =100
+        image_height,image_width = self.images[0]["image"].shape[:2]
+        image_width_inch = image_width / dpi
+        image_height_inch = image_height / dpi
+
         num_cols = len(self.images)
-        figure_size = (num_cols * 5, 5)
-        self.figure, self.axis = plt.subplots(1, num_cols, figsize=figure_size)
-        self.figure.subplots_adjust(right=0.9)
+        figure_width = num_cols * image_width_inch
+        figure_height = image_height_inch
+
+        figure_size = (figure_width, figure_height)
+        self.figure, self.axis = plt.subplots(1, num_cols, figsize=figure_size, dpi=dpi)
+        plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
 
         axes = self.axis if isinstance(self.axis, np.ndarray) else np.array([self.axis])
         for axis, image_dict in zip(axes, self.images):

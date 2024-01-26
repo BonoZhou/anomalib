@@ -1,23 +1,23 @@
 dataset:  
-  name: cpu
+  name: fucut
   format: folder
-  path: ./datasets/CPU
+  path: ./datasets/fucut
   task: classification
-  normal_dir: "OK1"
-  normal_test_dir: null
-  abnormal_dir: "NG1"
+  normal_dir: "train/good"
+  normal_test_dir: 
+  abnormal_dir: "test/ng"
   mask_dir: null
   extensions: ".jpg"
   train_batch_size: 16 #默认32
   eval_batch_size: 16 #默认32
   num_workers: 8
-  image_size: [325,800] # dimensions to which images are resized (mandatory)
-  center_crop: 224 # dimensions to which images are center-cropped after resizing (optional)
+  image_size: [750,2048] # dimensions to which images are resized (mandatory)
+  center_crop:  #[325,800] # dimensions to which images are center-cropped after resizing (optional)
   normalization: imagenet # data distribution to which the images will be normalized: [none, imagenet]
   transform_config:
     train: null
     eval: null
-  test_split_mode: synthetic # options: [from_dir, synthetic]
+  test_split_mode: from_dir # options: [from_dir, synthetic]
   test_split_ratio: 0.2 # fraction of train images held out testing (usage depends on test_split_mode)
   val_split_mode: same_as_test # options: [same_as_test, from_test, synthetic]
   val_split_ratio: 0.5 # fraction of train/test images held out for validation (usage depends on val_split_mode)
@@ -56,15 +56,15 @@ visualization:
   show_images: False # show images on the screen
   save_images: True # save images to the file system
   log_images: True # log images to the available loggers (if any)
-  image_save_path: 'result' # path to which images will be saved
+  image_save_path: 'result/fu' # path to which images will be saved
   mode: full # options: ["full", "simple"]
 
 project:
   seed: 0
-  path: ./results
+  path: ./results/patchcore
 
 logging:
-  logger: [] # options: [comet, tensorboard, wandb, csv] or combinations.
+  logger: [csv] # options: [comet, tensorboard, wandb, csv] or combinations.
   log_graph: false # Logs the model graph to respective logger.
 
 optimization:
